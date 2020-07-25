@@ -1,9 +1,36 @@
-<h1>タスク一覧</h1>
+<% if logged_in? %>
+  <p>ログイン完了ユーザ: <%= current_user.name %></p>
 
-<ul>
+<div class="text-center">
+  <h2>タスク一覧</h2>
+</div>
+
+<ul class="list-unstyled">
   <% @tasks.each do |task| %>
-    <li><%= link_to task.id, task %> : <%= task.content %>   <%= task.status %></li>
+  <span>タスク </span><%= link_to task.id, task %>
+    <li class="media mb-3">
+      <div class="media-body">
+        <div>
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-lightning" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09zM4.157 8.5H7a.5.5 0 0 1 .478.647L6.11 13.59l5.732-6.09H9a.5.5 0 0 1-.478-.647L9.89 2.41 4.157 8.5z"/></svg>
+          <%=task.user.name%> <span class="text-muted">posted at <%= task.created_at %></span>
+        </div>
+        <div>
+          <p><%= task.content %></p>
+        </div>
+      </div>
+    </li>
   <% end %>
+  <%= paginate @tasks %>
 </ul>
 
 <%= link_to '新規タスクの投稿', new_task_path %>
+
+
+<% else %>
+  <div class="center jumbotron">
+    <div class="text-center">
+      <h1>Welcome to Tasklist</h1>
+      <%= link_to '今すぐサインアップ', signup_path, class: 'btn btn-lg btn-success' %>
+    </div>
+  </div>
+<% end %>
