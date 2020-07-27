@@ -2,7 +2,7 @@
   <p>ログイン完了ユーザ: <%= current_user.name %></p>
 
 <div class="text-center">
-  <h2><%= @task.user.name %>さんのタスク一覧</h2>
+  <h2><%= current_user.name %>さんのタスク一覧</h2>
 </div>
 
 <ul class="list-unstyled">
